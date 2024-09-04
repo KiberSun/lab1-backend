@@ -12,7 +12,6 @@ import java.io.IOException;
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
-@Slf4j
 public class MainController {
 
     private final MainService mainService;
@@ -22,12 +21,17 @@ public class MainController {
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Void> writeString(@RequestBody String string){
         try {
-            log.info("POST request catched");
             mainService.writeString(string);
             return ResponseEntity.ok().build();
         } catch (IOException e) {
             return ResponseEntity.badRequest().build();
         }
+    }
+
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<String> getString(){
+        return ResponseEntity.ok().body(mainService.getString());
     }
 
 }
