@@ -1,0 +1,33 @@
+package org.krytev.lab_devops1.backend_microservice.controller;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.krytev.lab_devops1.backend_microservice.service.MainService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
+
+@RestController
+@RequestMapping("/api")
+@RequiredArgsConstructor
+@Slf4j
+public class MainController {
+
+    private final MainService mainService;
+
+    @PostMapping
+    @CrossOrigin(origins = "*")
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<Void> writeString(@RequestBody String string){
+        try {
+            log.info("POST request catched");
+            mainService.writeString(string);
+            return ResponseEntity.ok().build();
+        } catch (IOException e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+}
