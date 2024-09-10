@@ -29,6 +29,7 @@ public class MainController {
     }
 
     @GetMapping
+    @CrossOrigin(origins = "*")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<String> getString(){
         return ResponseEntity.ok().body(mainService.getString());
