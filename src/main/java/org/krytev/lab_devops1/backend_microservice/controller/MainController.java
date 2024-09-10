@@ -17,6 +17,7 @@ public class MainController {
     private final MainService mainService;
 
     @PostMapping
+    @CrossOrigin(origins = "*")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Void> writeString(@RequestBody String string){
         try {
@@ -28,6 +29,7 @@ public class MainController {
     }
 
     @GetMapping
+    @CrossOrigin(origins = "*")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<String> getString(){
         return ResponseEntity.ok().body(mainService.getString());
